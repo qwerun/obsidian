@@ -1,0 +1,236 @@
+{
+  "main": {
+    "id": "74b7864ad0411c06",
+    "type": "split",
+    "children": [
+      {
+        "id": "0fb282df8b71c150",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2f4b6a6d378f7ee5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming/Neighboring technologies/Redis.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Redis"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "60dcae3dfac3c8e5",
+    "type": "split",
+    "children": [
+      {
+        "id": "aa8ad6a92d8b4e9b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "61caa2fda373ad8b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Файловый менеджер"
+            }
+          },
+          {
+            "id": "1f509fcdb22f4737",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Поиск"
+            }
+          },
+          {
+            "id": "0a6374d85f977ae4",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "653d5117a9736b2e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c433213d724304b3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0baa14978e358b64",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "241d952aabed0e04",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "2473689679fe266c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b76b243e77cf74a8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          },
+          {
+            "id": "7aae6b90808d5ced",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          },
+          {
+            "id": "8e00f5c77e7789f0",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {},
+              "icon": "SpacedRepIcon",
+              "title": "Очередь заметок на повторение"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Меню быстрого перехода": false,
+      "graph:Граф": false,
+      "canvas:Создать новый холст": false,
+      "daily-notes:Сегодняшняя заметка": false,
+      "templates:Вставить шаблон": false,
+      "command-palette:Открыть палитру команд": false,
+      "obsidian-spaced-repetition:Изучать карточки": false,
+      "crosslink-advanced:Open random inbox item": false
+    }
+  },
+  "active": "2f4b6a6d378f7ee5",
+  "lastOpenFiles": [
+    "Programming/Go/Компилятор/1 Компилятор Go.md",
+    "Programming/Neighboring technologies/Redis.md",
+    "Programming/Go/Доп информация/Персистентность в Redis.md",
+    "Programming/Go/defer.md",
+    "Programming/DB/_DB.md",
+    "Programming/General/_General.md",
+    "Programming/Neighboring technologies/_Neighboring technologies.md",
+    "Programming/System Design/_System Design.md",
+    "Programming/Go/_Go.md",
+    "Programming/Programming_.md",
+    "Programming/General.zip",
+    "Programming/Go/Toolchain/Профилирование и отладка.md",
+    "files/photo/Pasted image 20250719032556.png",
+    "files/photo",
+    "files",
+    "Programming/Go/Toolchain/Тестирование и анализ качества.md",
+    "Programming/Go/Toolchain/1 Основные команды.md",
+    "Programming.zip",
+    "Programming/General/Проблемы с конкурентностью.md",
+    "Programming/General/Observability.md",
+    "Programming/General/Git Flow.md",
+    "Programming/General/Linux команды.md",
+    "Programming/General/Процеесс VS поток.md",
+    "Programming/General/REST vs GRPC.md",
+    "Programming/Go/Тестирование/Тестирование GRPC.md",
+    "Programming/Go/Доп информация/bufconn.md",
+    "Programming/Go/Доп информация/CGO.md",
+    "`bufconn`.md",
+    "Programming/Go/Тестирование/Моки.md",
+    "Programming/General/http/Идемпотентность в http.md",
+    "Programming/General/http/https vs http.md",
+    "Programming/General/http",
+    "Programming/General/Коллекции данных",
+    "Programming/General/Паттерны",
+    "Programming/Go/Доп информация/Без названия",
+    "Programming/Go/Доп информация",
+    "Programming/Go/Доп информация/GOMODCACHE",
+    "files/photo/Pasted image 20250719033325.png",
+    "files/photo/Pasted image 20250719033111.png",
+    "files/photo/Pasted image 20250719033100.png",
+    "files/photo/Pasted image 20250719032925.png",
+    "files/photo/Pasted image 20250719032739.png"
+  ]
+}
