@@ -1,9 +1,9 @@
 [
   "obsidian-tasks-plugin",
-  "telegram-sync",
   "dataview",
   "calendar",
   "obsidian-style-settings",
   "obsidian-spaced-repetition",
-  "crosslink-advanced"
+  "crosslink-advanced",
+  "remotely-save"
 ]

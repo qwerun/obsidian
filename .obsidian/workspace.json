@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/Neighboring technologies/Redis.md",
+                "file": "Programming/Структура Programming.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Redis"
+              "title": "Структура Programming"
             }
           }
         ]
@@ -154,12 +154,22 @@
             "state": {
               "type": "calendar",
               "state": {},
-              "icon": "calendar-with-checkmark",
-              "title": "Calendar"
+              "icon": "lucide-file",
+              "title": "Плагин больше не активен"
             }
           },
           {
             "id": "8e00f5c77e7789f0",
+            "type": "leaf",
+            "state": {
+              "type": "review-queue-list-view",
+              "state": {},
+              "icon": "SpacedRepIcon",
+              "title": "Очередь заметок на повторение"
+            }
+          },
+          {
+            "id": "218239f3c2fda542",
             "type": "leaf",
             "state": {
               "type": "review-queue-list-view",
@@ -185,48 +195,49 @@
       "templates:Вставить шаблон": false,
       "command-palette:Открыть палитру команд": false,
       "obsidian-spaced-repetition:Изучать карточки": false,
-      "crosslink-advanced:Open random inbox item": false
+      "crosslink-advanced:Open random inbox item": false,
+      "remotely-save:Remotely Save": false
     }
   },
-  "active": "2f4b6a6d378f7ee5",
+  "active": "8e00f5c77e7789f0",
   "lastOpenFiles": [
-    "Programming/Go/Компилятор/1 Компилятор Go.md",
-    "Programming/Neighboring technologies/Redis.md",
-    "Programming/Go/Доп информация/Персистентность в Redis.md",
-    "Programming/Go/defer.md",
-    "Programming/DB/_DB.md",
-    "Programming/General/_General.md",
-    "Programming/Neighboring technologies/_Neighboring technologies.md",
-    "Programming/System Design/_System Design.md",
-    "Programming/Go/_Go.md",
-    "Programming/Programming_.md",
+    "Programming/System Design/Структура System Design.md",
+    "Programming/Neighboring technologies/Структура Neighboring technologies.md",
+    "Programming/Go/Структура Go.md",
+    "Programming/General/Структура General.md",
+    "Programming/DB/Структура DB.md",
+    "Programming/Структура Programming.md",
+    "Programming/Go/Тестирование/Моки.md",
+    "Programming/Go/lock free struct.md",
+    "Programming/Go/Логеры, линтеры, трейсы.md",
+    "Programming/Go/Типизированный nil.md",
+    "Programming/Go/padding и alignment в структурах в го.md",
+    "Programming/Go/Graceful shutdown.md",
+    "Programming/Go/context.md",
+    "Programming/Go/garbage collector.md",
+    "Programming/Go/Планировщик.md",
+    "Programming/Go/sync.map.md",
+    "Programming/Go/sync.pool.md",
+    "Programming/Go/Синхронизация.md",
+    "Programming/Go/select.md",
+    "Programming/Go/chanel.md",
+    "Programming/Go/errgroup.md",
+    "sync.WaitGroup.md",
+    "Programming/Go/error.md",
+    "Programming/Go/Типы данных/map Хэш функция.md",
+    "Programming/Go/Типы данных/map.md",
+    "Programming/Go/Типы данных/set in go.md",
+    "Programming/Go/Без названия",
+    "Programming/Go/Типы данных",
+    "Programming/DB/Доп информация",
+    "Programming/Neighboring technologies/Доп информация",
     "Programming/General.zip",
-    "Programming/Go/Toolchain/Профилирование и отладка.md",
     "files/photo/Pasted image 20250719032556.png",
     "files/photo",
     "files",
-    "Programming/Go/Toolchain/Тестирование и анализ качества.md",
-    "Programming/Go/Toolchain/1 Основные команды.md",
     "Programming.zip",
-    "Programming/General/Проблемы с конкурентностью.md",
-    "Programming/General/Observability.md",
-    "Programming/General/Git Flow.md",
-    "Programming/General/Linux команды.md",
-    "Programming/General/Процеесс VS поток.md",
-    "Programming/General/REST vs GRPC.md",
-    "Programming/Go/Тестирование/Тестирование GRPC.md",
-    "Programming/Go/Доп информация/bufconn.md",
-    "Programming/Go/Доп информация/CGO.md",
-    "`bufconn`.md",
-    "Programming/Go/Тестирование/Моки.md",
-    "Programming/General/http/Идемпотентность в http.md",
-    "Programming/General/http/https vs http.md",
     "Programming/General/http",
     "Programming/General/Коллекции данных",
-    "Programming/General/Паттерны",
-    "Programming/Go/Доп информация/Без названия",
-    "Programming/Go/Доп информация",
-    "Programming/Go/Доп информация/GOMODCACHE",
     "files/photo/Pasted image 20250719033325.png",
     "files/photo/Pasted image 20250719033111.png",
     "files/photo/Pasted image 20250719033100.png",
