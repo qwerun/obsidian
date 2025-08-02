@@ -155,6 +155,8 @@ type bucket struct {
 
 ## Полезные ссылки
 
+- https://www.youtube.com/watch?v=lfeOR6zDnx4&list=PLZxNk0b1mgOdgBzH04jRwZM0c183iXUJ3&index=8
+     
 - https://tip.golang.org/doc/go1.24
     
 - https://go.dev/blog/swisstable

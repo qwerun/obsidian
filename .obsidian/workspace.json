@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "0fb282df8b71c150",
+        "id": "123c3e1b95c25692",
         "type": "tabs",
         "children": [
           {
-            "id": "2f4b6a6d378f7ee5",
+            "id": "84cf5eca18db01da",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/Структура Programming.md",
+                "file": "Programming/Go/error.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Структура Programming"
+              "title": "error"
             }
           }
         ]
@@ -201,32 +201,32 @@
   },
   "active": "8e00f5c77e7789f0",
   "lastOpenFiles": [
+    "Programming/Go/Типы данных/map.md",
+    "Programming/Go/Типы данных/slice and array.md",
+    "Programming/Go/Типы данных/String.md",
+    "Programming/Neighboring technologies/Redis.md",
+    "Programming/DB/Блокировки.md",
+    "Programming/DB/Репликация, партицирование, шардирование.md",
+    "Programming/DB/jsonb.md",
+    "Programming/DB/Миграции.md",
+    "Programming/DB/Доп информация/DDL.md",
+    "Programming/DB/CAP теорема.md",
+    "Programming/DB/ACID.md",
+    "Programming/DB/Транзакции.md",
+    "ACID свойства.md",
+    "Programming/DB/Explain analyze.md",
+    "Programming/DB/Триггеры.md",
+    "Programming/DB/MVCC в PostgreSQL.md",
+    "Programming/General/Основы SOLID.md",
+    "Programming/Структура Programming.md",
     "Programming/System Design/Структура System Design.md",
     "Programming/Neighboring technologies/Структура Neighboring technologies.md",
     "Programming/Go/Структура Go.md",
     "Programming/General/Структура General.md",
     "Programming/DB/Структура DB.md",
-    "Programming/Структура Programming.md",
     "Programming/Go/Тестирование/Моки.md",
     "Programming/Go/lock free struct.md",
     "Programming/Go/Логеры, линтеры, трейсы.md",
-    "Programming/Go/Типизированный nil.md",
-    "Programming/Go/padding и alignment в структурах в го.md",
-    "Programming/Go/Graceful shutdown.md",
-    "Programming/Go/context.md",
-    "Programming/Go/garbage collector.md",
-    "Programming/Go/Планировщик.md",
-    "Programming/Go/sync.map.md",
-    "Programming/Go/sync.pool.md",
-    "Programming/Go/Синхронизация.md",
-    "Programming/Go/select.md",
-    "Programming/Go/chanel.md",
-    "Programming/Go/errgroup.md",
-    "sync.WaitGroup.md",
-    "Programming/Go/error.md",
-    "Programming/Go/Типы данных/map Хэш функция.md",
-    "Programming/Go/Типы данных/map.md",
-    "Programming/Go/Типы данных/set in go.md",
     "Programming/Go/Без названия",
     "Programming/Go/Типы данных",
     "Programming/DB/Доп информация",
