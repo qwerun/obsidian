@@ -4,24 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "123c3e1b95c25692",
+        "id": "e6e58a9a51bdeeb7",
         "type": "tabs",
         "children": [
           {
-            "id": "84cf5eca18db01da",
+            "id": "cf29928272fd8d03",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Programming/Go/error.md",
+                "file": "Programming/Neighboring technologies/gRPC метаданные.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "error"
+              "title": "gRPC метаданные"
+            }
+          },
+          {
+            "id": "dde298ab362405f2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Programming/Go/context.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "context"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -53,7 +68,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "grpc",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -188,6 +203,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Создать новую базу": false,
       "switcher:Меню быстрого перехода": false,
       "graph:Граф": false,
       "canvas:Создать новый холст": false,
@@ -201,32 +217,36 @@
   },
   "active": "8e00f5c77e7789f0",
   "lastOpenFiles": [
-    "Programming/Go/Типы данных/map.md",
-    "Programming/Go/Типы данных/slice and array.md",
-    "Programming/Go/Типы данных/String.md",
-    "Programming/Neighboring technologies/Redis.md",
-    "Programming/DB/Блокировки.md",
-    "Programming/DB/Репликация, партицирование, шардирование.md",
-    "Programming/DB/jsonb.md",
-    "Programming/DB/Миграции.md",
-    "Programming/DB/Доп информация/DDL.md",
-    "Programming/DB/CAP теорема.md",
-    "Programming/DB/ACID.md",
-    "Programming/DB/Транзакции.md",
-    "ACID свойства.md",
-    "Programming/DB/Explain analyze.md",
-    "Programming/DB/Триггеры.md",
-    "Programming/DB/MVCC в PostgreSQL.md",
+    "Programming/General/http/http коды ошибок, методы.md",
     "Programming/General/Основы SOLID.md",
-    "Programming/Структура Programming.md",
-    "Programming/System Design/Структура System Design.md",
-    "Programming/Neighboring technologies/Структура Neighboring technologies.md",
-    "Programming/Go/Структура Go.md",
-    "Programming/General/Структура General.md",
-    "Programming/DB/Структура DB.md",
-    "Programming/Go/Тестирование/Моки.md",
-    "Programming/Go/lock free struct.md",
-    "Programming/Go/Логеры, линтеры, трейсы.md",
+    "Programming/General/http/http1 vs http 2.md",
+    "Programming/Go/context.md",
+    "Programming/Go/errgroup.md",
+    "Programming/Go/chanel.md",
+    "Programming/Вопросы.md",
+    "Programming/Go/error.md",
+    "Programming/Go/garbage collector.md",
+    "Programming/General/Паттерны.md",
+    "Programming/General/Процеесс VS поток.md",
+    "Programming/General/Git Flow.md",
+    "Programming/General/Observability.md",
+    "Programming/General/TCP IP и UDP.md",
+    "Programming/General/Linux команды.md",
+    "Programming/General/Коллекции данных.md",
+    "Programming/General/http/https vs http.md",
+    "Programming/General/Проблемы с конкурентностью.md",
+    "Programming/Neighboring technologies/JWT токен.md",
+    "Programming/DB/ACID.md",
+    "Programming/DB/Нормализация БД.md",
+    "Programming/Neighboring technologies/Docker.md",
+    "Programming/System Design/Load balancer.md",
+    "Programming/Neighboring technologies/Как перейти от монолита к микросервисам.md",
+    "Programming/Neighboring technologies/Доп информация/DDD.md",
+    "Programming/Neighboring technologies/Чистая архитектура.md",
+    "files/photo/Pasted image 20250804040822.png",
+    "files/photo/Pasted image 20250804045030.png",
+    "files/photo/Pasted image 20250804044547.png",
+    "files/photo/Pasted image 20250804040848.png",
     "Programming/Go/Без названия",
     "Programming/Go/Типы данных",
     "Programming/DB/Доп информация",

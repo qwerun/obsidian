@@ -47,7 +47,7 @@ writer := kafka.NewWriter(kafka.WriterConfig{
 err := writer.WriteMessages(ctx, kafka.Message{Value: []byte("order123")})
 ```
 
-> ❓ *Вопрос на собеседовании:*  
+> [[FAQ!]] *Вопрос на собеседовании:*  
 > *Как producer определяет, в какую партицию отправить сообщение?*  
 > ✅ *Ответ:* Через key-партиционирование (по умолчанию по hash от ключа), либо round-robin.
 

@@ -1,138 +1,141 @@
-## Введение
+# `sync.Map` — конкурентная хэш‑таблица в Go
 
-`sync.Map` решает главную боль конкурентных Go‑приложений — **безопасный и быстрый доступ к общей карте** без явных мьютексов. После улучшений в Go 1.22‑1.24 (новый **HashTrieMap** и тонкая GC‑интеграция) структура стала реальной альтернативой паре `map` + `sync.RWMutex`.
-
-> [!info] Цель: быстро показать, **когда** использовать `sync.Map`, **как** она устроена и **чем** отличается от `map`+мьютекс.
+> [!abstract] **TL;DR** `sync.Map` — это оптимизированная под «много чтений / мало записей» конкурентная структура. Внутри две обычные `map[K]*entry`: _read‑only_ и _dirty_. Чтения из _read_ идут без блокировок, изменения попадают в _dirty_ под одним `sync.Mutex`. Когда счётчик промахов (`misses`) достигает размера _dirty_, она мгновенно «повышается» и становится новым _read_.
 
 ---
 
-## Внутреннее устройство `sync.Map`
+## 1  Когда выбирать `sync.Map`
 
-|Компонент|Назначение|Особенности|
-|---|---|---|
-|`readOnly`|Lock‑free чтение|Хранится в `atomic.Value`|
-|`dirty`|Записи/новые ключи|Под мьютексом, продвигается в `readOnly` по счётчику промахов|
-|HashTrieMap (1.24)|Хэш‑trie|O(log N) lookup, лучшая cache‑locality|
+> [!tip] Бери `sync.Map`, если…
+> 
+> - ключей много, заранее не известны;
+>     
+> - профиль — ≥ 80 % чтений;
+>     
+> - нужна ленивость создания значений (`LoadOrStore`).
+>     
 
-**Алгоритм:** чтение → fast‑path в `readOnly`; промах → `dirty` (slow‑path) → по условию «misses ≥ len(dirty)» карты меняются. GC видит старую карту как единый объект и забирает её в фоне.
+В остальных сценариях **map** **+** **sync.RWMutex** часто быстрее и типобезопаснее.
 
-_Выжимка_
-
-- Чтения lock‑free, записи блокируют только `dirty`.
-    
-- Под нагрузкой read‑heavy contention ≈ 0.
-    
-- HashTrieMap стабилизирует латентность при > 10M ключей.
-    
-
----
-
-## `map` + `sync.(RW)Mutex`
-
-|   |   |   |
-|---|---|---|
-|Путь|Действия|Латентность|
-|Fast|`RLock→lookup→RUnlock`|низкая при few writes|
-|Slow|`Lock→write→Unlock`|блокирует все чтения|
-
-- При write‑heavy доля slow‑path растёт → contention.
-    
-- Resize мапы удваивает память, создаёт GC‑пик.
-    
-
----
-
-## Сценарии и выбор
-
-|   |   |
-|---|---|
-|Условие|Лучше использовать|
-|Read > 90 %, высокая кардинальность|`**sync.Map**`|
-|Write ≥ 25 %, hot‑key|`map` + sharded `RWMutex`|
-|Нужен снапшот без копирования|`sync.Map.Range`|
-|Память критична, ключей < 1 k|Обычный `map` + мьютекс|
-
-> [!tip] Замерьте **write‑ratio** и **p95 latency** — это главный критерий.
-
----
-
-## Бенчмарки (Go 1.24, M1 Max, 10 CPU)
-
-```
-BenchmarkSyncMap_Read95W5   4.5 ns/op   0 B/op   0 allocs/op
-BenchmarkMutexMap_Read95W5  9.1 ns/op   0 B/op   0 allocs/op
-BenchmarkSyncMap_Write30    85 ns/op   16 B/op   1 alloc/op
-BenchmarkMutexMap_Write30   52 ns/op    0 B/op   0 alloc/op
-```
-
-- `sync.Map` быстрее в read‑heavy, медленнее в write‑heavy.
-    
-- Аллокация на запись — внутренняя обёртка `*entry`.
-    
-
----
-
-## Чек‑лист выбора
-
-1. **write ≤ 10 %?** — смело берите `sync.Map`.
-    
-2. **Hot‑key?** — шардируйте `map`, либо ждите HashTrieMap.
-    
-3. **Нужен lock‑free Range?** — `sync.Map`.
-    
-4. **Профиль write > 30 %** — `RWMutex` или channel‑шард.
-    
-
----
-
-## Edge‑cases
-
-- Ключи без `==` (срезы) не подходят и там и там.
-    
-- `LoadOrStore` — используйте для lazy‑инициализации, но не кладите тяжёлый конструктор внутрь.
-    
-- Нельзя «очистить» `sync.Map` — только создать новую.
-    
-
-> [!warning] Не смешивайте своё шардирование с HashTrieMap — получите неоптимальный кэш.
-
----
-
-## Примеры
-
-### `sync.Map`
+## 2  API‑шпаргалка
 
 ```
 var m sync.Map
-m.Store("id", 1)
-if v, ok := m.Load("id"); ok { fmt.Println(v) }
-m.Range(func(k, v any) bool { fmt.Println(k, v); return true })
+m.Store(k, v)              // запись
+v, ok := m.Load(k)         // чтение
+actual, loaded := m.LoadOrStore(k, v0)
+old, swapped := m.CompareAndSwap(k, oldV, newV)
+m.Delete(k)                // логическое удаление
+m.Range(func(k, v any) bool { … return true })
 ```
 
-### `map` + `RWMutex`
+Все операции, кроме `Range`, атомарны по отношению друг к другу.
+
+## 3  Внутреннее устройство
 
 ```
-var (
-  mu sync.RWMutex
-  mm = make(map[string]int)
-)
-mu.Lock(); mm["id"] = 1; mu.Unlock()
-mu.RLock(); _ = mm["id"]; mu.RUnlock()
+Map
+├─ mu    sync.Mutex           ← защищает dirty и служебные поля
+├─ read  *readOnly (atomic)   ← «снимок», только читается
+├─ dirty map[key]*entry       ← рабочая копия под mu
+└─ misses int                 ← счётчик промахов
+
+readOnly
+├─ m       map[key]*entry     ← неизменяемая карта
+└─ amended bool               ← есть ли ключи только в dirty
+
+entry
+└─ p atomic.Pointer[value]    ← *v | nil | expunged
 ```
+
+### 3.1  Путь **чтения** (`Load`)
+
+1. Атомарно берём указатель `read`.
+    
+2. Ищем ключ в `read.m` (обычный lookup Swiss‑таблицы).
+    
+3. Из найденного `*entry` читаем `entry.p`.
+    
+    - Если `p == nil` ➜ ключ удалён (slow‑path).
+        
+    - Если `p == expunged` ➜ ключ окончательно удалён (slow‑path).
+        
+    - Иначе возвращаем значение **без мьютекса**.
+        
+4. При промахе и `read.amended = true` идём в _dirty_ под `mu`, `misses++`.
+    
+
+### 3.2  Путь **записи** (`Store`) 
+
+- Быстрый: ключ в `read`, `entry.p.CompareAndSwap`.
+    
+- Медленный: под `mu` создаём/обновляем запись в _dirty_. Если `dirty == nil`, копируем в неё **все** указатели из текущего снимка (O(n) поверхностная копия).
+    
+
+### 3.3  Promotion
+
+Когда `misses ≥ len(dirty)`, выполняется
+
+```
+read = &readOnly{m: dirty}
+dirty, misses = nil, 0
+```
+
+Старый снимок становится мусором для GC.
+
+> [!faq] Часто задаваемое 
+> **Q:** Сколько мьютексов в `sync.Map`?  
+> **A:** Один `mu`. Чтения lock‑free.
+> 
+> **Q:** Можно ли атомарно обновить два ключа?  
+> **A:** Нет, `sync.Map` не предоставляет групповых транзакций; берите `map`+`Mutex`.
+> 
+> **Q:** Когда появятся дженерики?  
+> **A:** С Go 1.21 есть `type Map[K comparable, V any] struct …`.
+> 
+> **Q:** Почему значения хранятся через `*entry`?  
+> **A:** Чтобы _read_ и _dirty_ делили одни и те же объекты и изменения были видны без копий.
+
+## 4  Жизненный цикл ключа (high‑level)
+
+1. **Store** нового ключа → попадает в _dirty_, `read.amended = true`.
+    
+2. **Load** пропускает в _read_, находит в _dirty_, `misses++`.
+    
+3. После N промахов → _dirty_ ➜ новый _read_, `dirty=nil`.
+    
+4. **Delete** ставит `entry.p = nil` (lock‑free) → позднее станет `expunged`.
+    
+
+## 5  Производительность (Go 1.24)
+
+- Чтение из `sync.Map` ~= обычный `map` (Swiss Tables) — два атомарных load’а сверху.
+    
+- Запись медленней `map+Mutex`, т.к. копирование при создании _dirty_ и CAS.
+    
+- Память: +10‑20 % из‑за двух карт и sentinel‑значений.
+    
+
+Benchmarks от Go team показывают выигрыш, когда соотношение **reads/writes ≥ 4:1**.
+
 
 ---
 
-> [!faq] 
-> **Q:** Почему `sync.Map` аллоцирует на запись?  
-> **A:** Создаётся `entry`, обёртка вокруг value.  
-> 
-> **Q:** Можно ли заменить Redis‑кэш на `sync.Map`?  
-> **A:** Нет, она in‑process. Используйте для локальных кэшей.  
-> 
-> **Q:** Какой размер ключей критичен?  
-> **A:** При > 1 M уникальных ключей HashTrieMap показывает стабильное O(log N).
+### Источники
 
----
-## Заключение
+1. Victoriametrics — _Go sync.Map: The Right Tool for the Right Job_, Oct 04 2024 https://victoriametrics.com/blog/go-sync-map/
+    
+2. Dave Cheney — _How the Go runtime implements maps efficiently_, May 29 2018 https://dave.cheney.net/2018/05/29/how-the-go-runtime-implements-maps-efficiently-without-generics
+    
+3. Go 1.24 Release Notes — https://go.dev/doc/go1.24
+    
+4. Go blog — _Faster Go maps with Swiss Tables_, Feb 26 2025 https://go.dev/blog/swisstable
+    
+5. `src/runtime/map.go` (Go tip) https://go.googlesource.com/go/+/refs/heads/master/src/runtime/map.go
+    
+6. GitHub Issue #70683 — _sync: replace Map implementation with HashTrieMap_ https://github.com/golang/go/issues/70683
+    
+7. GitHub Issue #73015 — _Export HashTrieMap for external use_ https://github.com/golang/go/issues/73015
+    
+8. Go package docs — `sync` https://pkg.go.dev/sync
 
-`sync.Map` — оружие для **read‑heavy** кейсов, где важен lock‑free доступ и минимальные GC‑паузы. При write‑heavy нагрузке старый добрый `map` + `RWMutex` всё ещё быстрее и предсказуемее. **Измеряйте** на своей нагрузке, прежде чем выбрать.

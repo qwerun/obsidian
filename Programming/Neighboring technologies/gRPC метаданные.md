@@ -8,9 +8,8 @@
 - Метаданные реализуются как HTTP/2-заголовки в формате ключ-значение.
 - Существуют три типа: request headers, response headers и response trailers.
 - Часто применяются для авторизации, трассировки, передачи контекста.
-- Устанавливаются и читаются через специальные API (`metadata.MD` в Go
 - Есть ограничения на размер и формат ключей.
-- Лучше всего обрабатывать их через middleware/interceptors.
+- Лучше всего обрабатывать их через middleware
 
 ---
 
@@ -39,55 +38,6 @@
 #### Response trailers  
 
 Передаются сервером в самом конце вызова. Обычно содержат статусные метки или отчёт о валидации запроса.
-
----
-
-### Практические сценарии использования  
-
-- **Аутентификация и авторизация**  
-  ```http
-  authorization: Bearer eyJhbGciOiJIUzI1NiIs...
-  ```
-
-- **Трассировка запросов**  
-  ```http
-  trace-id: 1ac73f00d
-  span-id: 334cb15a
-  ```
-
-- **Передача пользовательского контекста**  
-  ```http
-  locale: ru-RU
-  client-version: 2.3.1
-  ```
-
-> [!example]
-> Можно добавить проверку `authorization` в `UnaryServerInterceptor`, извлекая токен из контекста.
-
----
-
-### Примеры кода
-
-#### Установка и чтение метаданных в Go  
-
-```go
-// client side — установка метаданных
-md := metadata.Pairs("authorization", "Bearer token123")
-ctx := metadata.NewOutgoingContext(context.Background(), md)
-resp, err := client.SomeMethod(ctx, req)
-```
-
-```go
-// server side — чтение метаданных
-func (s *server) SomeMethod(ctx context.Context, req *pb.Request) (*pb.Response, error) {
-  md, ok := metadata.FromIncomingContext(ctx)
-  if ok {
-    token := md["authorization"]
-    // ...
-  }
-  return &pb.Response{}, nil
-}
-```
 
 ---
 

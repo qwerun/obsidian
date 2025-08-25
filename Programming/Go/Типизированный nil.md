@@ -35,7 +35,7 @@ func (e *myErr) Error() string { return e.msg }
 func mayFail(b bool) error {
     if b {
         var zero *myErr                // nil-пойнтер
-        return zero                    // ОПАСНО: typed-nil
+        return zero                    // ОПАСНО: val = nil
     }
     return nil
 }
